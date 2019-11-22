@@ -52,6 +52,9 @@ server:
   path: ./dist
   # indicates that service is behind an HTTPS proxy
   https: false
+# docker configuration
+docker:
+  registry: registry.ignitial.io
 # options published through discovery mechanism
 publicOptions:
   # declares component injection

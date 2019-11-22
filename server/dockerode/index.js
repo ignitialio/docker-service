@@ -47,6 +47,17 @@ class DockerConnector {
       }
     })
   }
+
+  pushImageByName(name) {
+    return new Promise((resolve, reject) => {
+      this.getImage(name)
+        .then(image => {
+          image.push().then(() => {
+            resolve()
+          }).catch(err => reject())
+        }).catch(err => reject(err))
+    })
+  }
 }
 
 exports.DockerConnector = DockerConnector

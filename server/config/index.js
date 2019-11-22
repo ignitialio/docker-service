@@ -113,6 +113,10 @@ module.exports = {
     /* indicates that service is behind an HTTPS proxy */
     https: false,
   },
+  /* docker configuration */
+  docker: {
+    registry: process.env.IIOS_DOCKER_REGISTRY || 'localhost:5000'
+  },
   /* options published through discovery mechanism */
   publicOptions: {
     /* declares component injection */
