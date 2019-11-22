@@ -73,6 +73,12 @@ module.exports = {
     namespace: process.env.IIOS_NAMESPACE || 'ignitialio',
     /* grants for current service: auto-fill */
     grants: {
+      __privileged__: {
+        'create:any': [ '*' ],
+        'read:any': [ '*' ],
+        'update:any': [ '*' ],
+        'delete:any': [ '*' ]
+      },
       admin: {
         'create:any': [ '*' ],
         'read:any': [ '*' ],
@@ -115,6 +121,9 @@ module.exports = {
   },
   /* docker configuration */
   docker: {
+    host: process.env.IIOS_DOCKER_HOST || 'dind',
+    port: process.env.IIOS_DOCKER_PORT|| 2375,
+    protocol: 'http',
     registry: process.env.IIOS_DOCKER_REGISTRY || 'localhost:5000'
   },
   /* options published through discovery mechanism */

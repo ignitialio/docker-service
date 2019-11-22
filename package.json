@@ -52,6 +52,8 @@
     "@ignitial/iio-services": "^2.2.8",
     "dockerode": "^3.0.2",
     "fs-extra": "^8.1.0",
+    "lodash": "^4.17.15",
+    "tar": "^5.0.5",
     "yaml": "^1.7.2"
   },
   "devDependencies": {

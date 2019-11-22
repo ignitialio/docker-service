@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM ignitial/dockerode
 
 RUN mkdir -p /opt && mkdir -p /opt/docker
 

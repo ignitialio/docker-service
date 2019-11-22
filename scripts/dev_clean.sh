@@ -27,8 +27,8 @@ export IIOS_EMAILER_SMTP_PASS=toto
 
 if [ -z "$1" ]; then
   echo "stop svc only"
-  docker-compose -f docker/docker-compose-dev.yml stop docker
-  docker-compose -f docker/docker-compose-dev.yml rm -f docker
+  docker-compose -f docker/docker-compose-dev.yml stop docker dind
+  docker-compose -f docker/docker-compose-dev.yml rm -f docker dind
 else
   echo "stop full docker deploy"
   docker-compose -f docker/docker-compose-dev.yml stop

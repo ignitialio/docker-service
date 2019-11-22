@@ -47,7 +47,7 @@ server:
   # server host
   host: docker.default.svc.cluster.local
   # server port
-  port: 20499
+  port: 20513
   # path to statically serve (at least one asset for icons for example)
   path: ./dist
   # indicates that service is behind an HTTPS proxy

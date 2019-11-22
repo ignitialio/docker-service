@@ -6,57 +6,27 @@ const utils = require('@ignitial/iio-services').utils
 const getAllMethods = utils.getMethods
 
 class DockerConnector {
-  constructor(service) {
+  constructor(service, options) {
     this._service = service
+    console.log('docker client will target: ', options)
 
-    this._docker = new Docker({socketPath: '/var/run/docker.sock'});
+    this._docker = new Docker({
+      host: options.host,
+      port: options.port,
+      protocol: options.protocol,
+      socketPath: null
+    })
 
     this._api = getAllMethods(this._docker)
 
     for (let m of this._api) {
-      this[m] = () => {
+      service[m] = () => {
         let args = Array.from(arguments)
-        // remove userId
+        // remove grants info
         args = args.shift()
-        return this._service[m].apply(this._docker[m], args)
+        return this._docker[m].apply(this._docker, args)
       }
     }
-  }
-
-  buildFromRawDataArchive(buildInfo) {
-    return new Promise((resolve, reject) => {
-      try {
-        if (buildInfo.archive && buildInfo.name) {
-          let archivePath = path.join(__dirname, './dist')
-          fs.writeFileSync(archivePath, buildInfo.archive)
-          this.buildImage(archivePath, { t: buildInfo.name })
-            .then(response => {
-              try {
-                fs.unlinkSync(archivePath)
-                resolve(response)
-              } catch (err) {
-                reject(err)
-              }
-            })
-            .catch(err => reject(err))
-        } else {
-          reject(new Error('info missing'))
-        }
-      } catch (err) {
-        reject(err)
-      }
-    })
-  }
-
-  pushImageByName(name) {
-    return new Promise((resolve, reject) => {
-      this.getImage(name)
-        .then(image => {
-          image.push().then(() => {
-            resolve()
-          }).catch(err => reject())
-        }).catch(err => reject(err))
-    })
   }
 }
 
