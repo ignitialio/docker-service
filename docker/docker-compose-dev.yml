@@ -71,7 +71,6 @@ services:
     ports:
       - ${IIOS_DOCKER_EXPORTED_PORTS}
     environment:
-      - IIOS_DOCKER_HOST=dind
       - IIOS_REDIS_HOST=redis
       - IIOS_NAMESPACE=${IIOS_NAMESPACE}
       - IIOS_SERVER_HOST=${IIOS_SERVER_HOST}

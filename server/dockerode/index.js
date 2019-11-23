@@ -20,11 +20,13 @@ class DockerConnector {
     this._api = getAllMethods(this._docker)
 
     for (let m of this._api) {
-      service[m] = () => {
+      let docker = this._docker
+      service[m] = function() {
         let args = Array.from(arguments)
         // remove grants info
-        args = args.shift()
-        return this._docker[m].apply(this._docker, args)
+        args = args.splice(0, args.length - 1)
+        console.log('----', m, args)
+        return docker[m].apply(docker, args)
       }
     }
   }

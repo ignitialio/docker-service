@@ -22,7 +22,7 @@ export SVC_VERSION=$(cat package.json \
 
 echo "app version: ${SVC_VERSION}"
 
-export IIOS_SERVER_HOST=0.0.0.0
+export IIOS_SERVER_HOST=docker
 export IIOS_SERVER_PORT=20513
 export IIOS_DOCKER_EXPORTED_PORTS=$IIOS_SERVER_PORT:$IIOS_SERVER_PORT
 

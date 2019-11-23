@@ -25,13 +25,13 @@ class Docker extends Service {
         if (buildInfo.data && buildInfo.name) {
           let staticPath = path.join(process.cwd(), this._options.server.path)
           let archivePath = path.join(staticPath, './dist', buildInfo.name + '.tar')
+          console.log(archivePath)
           fs.writeFileSync(archivePath, buildInfo.data, 'binary')
 
           let imageName = this._options.docker.registry + '/' + buildInfo.name
           let url = 'http://' + this._options.server.host + ':' +
             this._options.server.port + '/dist/' + buildInfo.name + '.tar'
 
-          console.log(url)
           this.buildImage(null, {
             remote: url,
             t:  imageName
