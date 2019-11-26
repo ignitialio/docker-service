@@ -10,12 +10,16 @@ class DockerConnector {
     this._service = service
     console.log('docker client will target: ', options)
 
-    this._docker = new Docker({
-      host: options.host,
-      port: options.port,
-      protocol: options.protocol,
-      socketPath: null
-    })
+    if (!options.socketPath) {
+      this._docker = new Docker({
+        host: options.host,
+        port: options.port,
+        protocol: options.protocol,
+        socketPath: null
+      })
+    } else {
+      this._docker = new Docker({ socketPath: options.socketPath })
+    }
 
     this._api = getAllMethods(this._docker)
 

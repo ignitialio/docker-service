@@ -54,7 +54,14 @@ server:
   https: false
 # docker configuration
 docker:
-  registry: registry.ignitial.io
+  # docker in docker host
+  host: dind
+  # docker in docker port
+  port: 2375
+  # docker in docker protocol
+  protocol: http
+  # external Docker registry or internal (no creadentials management)
+  registry: registry.default.svc.cluster.local
 # options published through discovery mechanism
 publicOptions:
   # declares component injection
